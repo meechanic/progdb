@@ -5,7 +5,7 @@ from django.urls import reverse
 
 class Package(models.Model):
     name = models.TextField(unique = True)
-    human_decription = models.TextField()
+    human_description = models.TextField()
     machine_description = models.TextField()
     main_prog_language = models.TextField()
     package_collection = models.TextField()
@@ -25,7 +25,7 @@ class Package(models.Model):
 
 class Replica(models.Model):
     name = models.TextField(unique = True)
-    human_decription = models.TextField()
+    human_description = models.TextField()
     machine_description = models.TextField()
     is_main = models.TextField()
     is_installation = models.TextField()
@@ -48,7 +48,7 @@ class Replica(models.Model):
 
 class Module(models.Model):
     name = models.TextField(unique = True)
-    human_decription = models.TextField()
+    human_description = models.TextField()
     machine_description = models.TextField()
     prog_language = models.TextField()
     location = models.TextField()
@@ -70,7 +70,7 @@ class Module(models.Model):
 
 class SourceReplica(models.Model):
     name = models.TextField(unique = True)
-    human_decription = models.TextField()
+    human_description = models.TextField()
     machine_description = models.TextField()
     is_main = models.TextField()
     module = models.ForeignKey(Package, blank=True, null=True, related_name='sourcereplica_package', on_delete=models.CASCADE,)
@@ -89,7 +89,7 @@ class SourceReplica(models.Model):
 
 class FSObject(models.Model):
     name = models.TextField(unique = True)
-    human_decription = models.TextField()
+    human_description = models.TextField()
     machine_description = models.TextField()
     location = models.TextField()
     module = models.ForeignKey(Module, blank=True, null=True, related_name='fsobject_module', on_delete=models.CASCADE,)
