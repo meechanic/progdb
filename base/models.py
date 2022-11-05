@@ -11,7 +11,7 @@ class Package(models.Model):
     package_collection = models.TextField()
 
     def __str__(self):
-        return ' '.join([self.type, self.name])
+        return self.name
 
     def __unicode__(self):
         return self.__str__()
@@ -34,7 +34,7 @@ class Replica(models.Model):
     module = models.ForeignKey(Package, blank=True, null=True, related_name='replica_package', on_delete=models.CASCADE,)
 
     def __str__(self):
-        return ' '.join([self.type, self.name])
+        return self.name
 
     def __unicode__(self):
         return self.__str__()
@@ -56,7 +56,7 @@ class Module(models.Model):
     module = models.ForeignKey(Package, blank=True, null=True, related_name='module_package', on_delete=models.CASCADE,)
 
     def __str__(self):
-        return ' '.join([self.type, self.name])
+        return self.name
 
     def __unicode__(self):
         return self.__str__()
@@ -76,7 +76,7 @@ class SourceReplica(models.Model):
     module = models.ForeignKey(Package, blank=True, null=True, related_name='sourcereplica_package', on_delete=models.CASCADE,)
 
     def __str__(self):
-        return ' '.join([self.type, self.name])
+        return self.name
 
     def __unicode__(self):
         return self.__str__()
@@ -96,7 +96,7 @@ class FSObject(models.Model):
     replica = models.ForeignKey(Replica, blank=True, null=True, related_name='fsobject_replica', on_delete=models.CASCADE,)
 
     def __str__(self):
-        return ' '.join([self.type, self.name])
+        return self.name
 
     def __unicode__(self):
         return self.__str__()
