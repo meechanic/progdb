@@ -51,6 +51,11 @@ class CategoryAdmin(ImportExportModelAdmin):
     resource_class = ModuleResource
 
 
+@admin.register(SourceReplica)
+class CategoryAdmin(ImportExportModelAdmin):
+    resource_class = SourceReplicaResource
+
+
 @admin.register(FSObject)
 class CategoryAdmin(ImportExportModelAdmin):
     resource_class = FSObjectResource
