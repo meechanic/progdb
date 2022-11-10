@@ -1,6 +1,5 @@
-from base.models import *
 from base.serializers import *
-from django.shortcuts import render
+from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -19,10 +18,8 @@ def api_root(request, format=None):
     """
     return Response({
         'packages': reverse('api-package', request=request),
-        'replicas': reverse('api-replica', request=request),
-        'modules': reverse('api-module', request=request),
-        'sourcereplicas': reverse('api-sourcereplica', request=request),
-        'fsobjects': reverse('api-fsobject', request=request),
+        'editions': reverse('api-replica', request=request),
+        'resources': reverse('api-module', request=request),
     })
 
 
@@ -41,12 +38,12 @@ class ApiPackage(viewsets.ModelViewSet):
 
 @authentication_classes((SessionAuthentication, BasicAuthentication, TokenAuthentication,))
 @permission_classes((IsAuthenticated,))
-class ApiReplica(viewsets.ModelViewSet):
+class ApiEdition(viewsets.ModelViewSet):
     """
     API endpoint that represents a list of objects.
     """
-    queryset = Replica.objects.all()
-    serializer_class = ReplicaSerializer
+    queryset = Edition.objects.all()
+    serializer_class = EditionSerializer
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     filter_fields=('name',)
     search_fields=('name',)
@@ -54,38 +51,12 @@ class ApiReplica(viewsets.ModelViewSet):
 
 @authentication_classes((SessionAuthentication, BasicAuthentication, TokenAuthentication,))
 @permission_classes((IsAuthenticated,))
-class ApiModule(viewsets.ModelViewSet):
+class ApiResource(viewsets.ModelViewSet):
     """
     API endpoint that represents a list of objects.
     """
-    queryset = Module.objects.all()
-    serializer_class = ModuleSerializer
+    queryset = Resource.objects.all()
+    serializer_class = ResourceSerializer
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
-    filter_fields=('name',)
-    search_fields=('name',)
-
-
-@authentication_classes((SessionAuthentication, BasicAuthentication, TokenAuthentication,))
-@permission_classes((IsAuthenticated,))
-class ApiSourceReplica(viewsets.ModelViewSet):
-    """
-    API endpoint that represents a list of objects.
-    """
-    queryset = SourceReplica.objects.all()
-    serializer_class = SourceReplicaSerializer
-    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
-    filter_fields=('name',)
-    search_fields=('name',)
-
-
-@authentication_classes((SessionAuthentication, BasicAuthentication, TokenAuthentication,))
-@permission_classes((IsAuthenticated,))
-class ApiFSObject(viewsets.ModelViewSet):
-    """
-    API endpoint that represents a list of objects.
-    """
-    queryset = FSObject.objects.all()
-    serializer_class = FSObjectSerializer
-    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
-    filter_fields=('name',)
-    search_fields=('name',)
+    filter_fields=('text',)
+    search_fields=('text',)

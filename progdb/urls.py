@@ -20,11 +20,10 @@ from rest_framework import routers
 from base.views import *
 from rest_framework.authtoken import views
 from rest_framework.schemas import get_schema_view as get_schema_view_rf
-from django.urls import path
-
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -47,11 +46,9 @@ schema_view_rf = get_schema_view_rf(
 )
 
 router = routers.DefaultRouter()
-router.register(r'apipackage', ApiPackage)
-router.register(r'apirepilca', ApiReplica)
-router.register(r'apimodule', ApiModule)
-router.register(r'apisourcereplica', ApiSourceReplica)
-router.register(r'apifsobject', ApiFSObject)
+router.register(r'apipackages', ApiPackage)
+router.register(r'apieditions', ApiEdition)
+router.register(r'apiresources', ApiResource)
 
 admin.site.site_header = 'ProgDB'
 admin.site.index_title = 'Administration'

@@ -5,10 +5,12 @@ from django.urls import reverse
 
 class Package(models.Model):
     name = models.TextField(unique = True)
-    human_description = models.TextField()
-    machine_description = models.TextField()
-    main_prog_language = models.TextField()
-    package_collection = models.TextField()
+    human_description = models.TextField(blank=True)
+    machine_description = models.TextField(blank=True)
+    main_prog_language = models.TextField(blank=True)
+    supercategory = models.TextField(blank=True)
+    category = models.TextField(blank=True)
+    subcategory = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
@@ -17,21 +19,18 @@ class Package(models.Model):
         return self.__str__()
 
     def get_absolute_url(self):
-        return reverse('source-view', kwargs={'pk': self.id})
+        return reverse('package-view', kwargs={'pk': self.id})
 
     class Meta:
         ordering = ['name']
 
 
-class Replica(models.Model):
+class Edition(models.Model):
     name = models.TextField(unique = True)
-    human_description = models.TextField()
-    machine_description = models.TextField()
-    is_main = models.TextField()
-    is_installation = models.TextField()
-    location = models.TextField()
-    replica_collection = models.TextField()
-    module = models.ForeignKey(Package, blank=True, null=True, related_name='replica_package', on_delete=models.CASCADE,)
+    human_description = models.TextField(blank=True)
+    machine_description = models.TextField(blank=True)
+    edition_number = models.TextField(blank=True)
+    package = models.ForeignKey(Package, blank=True, null=True, related_name='replica_package', on_delete=models.CASCADE,)
 
     def __str__(self):
         return self.name
@@ -40,69 +39,34 @@ class Replica(models.Model):
         return self.__str__()
 
     def get_absolute_url(self):
-        return reverse('source-view', kwargs={'pk': self.id})
+        return reverse('replica-view', kwargs={'pk': self.id})
 
     class Meta:
         ordering = ['name']
 
 
-class Module(models.Model):
-    name = models.TextField(unique = True)
-    human_description = models.TextField()
-    machine_description = models.TextField()
-    prog_language = models.TextField()
-    location = models.TextField()
-    sourcereplica_collection = models.TextField()
-    module = models.ForeignKey(Package, blank=True, null=True, related_name='module_package', on_delete=models.CASCADE,)
+class Resource(models.Model):
+    text = models.TextField(unique = True)
+    human_description = models.TextField(blank=True)
+    machine_description = models.TextField(blank=True)
+    scheme = models.TextField(blank=True)
+    host = models.TextField(blank=True)
+    path = models.TextField(blank=True)
+    supercollection = models.TextField(blank=True)
+    collection = models.TextField(blank=True)
+    subcollection = models.TextField(blank=True)
+    is_installation = models.BooleanField(default=False)
+    is_source = models.BooleanField(default=False)
+    edition = models.ForeignKey(Edition, blank=True, null=True, related_name='resource_edition', on_delete=models.CASCADE,)
 
     def __str__(self):
-        return self.name
+        return self.text
 
     def __unicode__(self):
         return self.__str__()
 
     def get_absolute_url(self):
-        return reverse('source-view', kwargs={'pk': self.id})
+        return reverse('resource-view', kwargs={'pk': self.id})
 
     class Meta:
-        ordering = ['name']
-
-
-class SourceReplica(models.Model):
-    name = models.TextField(unique = True)
-    human_description = models.TextField()
-    machine_description = models.TextField()
-    is_main = models.TextField()
-    module = models.ForeignKey(Package, blank=True, null=True, related_name='sourcereplica_package', on_delete=models.CASCADE,)
-
-    def __str__(self):
-        return self.name
-
-    def __unicode__(self):
-        return self.__str__()
-
-    def get_absolute_url(self):
-        return reverse('source-view', kwargs={'pk': self.id})
-
-    class Meta:
-        ordering = ['name']
-
-class FSObject(models.Model):
-    name = models.TextField(unique = True)
-    human_description = models.TextField()
-    machine_description = models.TextField()
-    location = models.TextField()
-    module = models.ForeignKey(Module, blank=True, null=True, related_name='fsobject_module', on_delete=models.CASCADE,)
-    replica = models.ForeignKey(Replica, blank=True, null=True, related_name='fsobject_replica', on_delete=models.CASCADE,)
-
-    def __str__(self):
-        return self.name
-
-    def __unicode__(self):
-        return self.__str__()
-
-    def get_absolute_url(self):
-        return reverse('source-view', kwargs={'pk': self.id})
-
-    class Meta:
-        ordering = ['name']
+        ordering = ['text']

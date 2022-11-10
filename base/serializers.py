@@ -8,25 +8,13 @@ class PackageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ReplicaSerializer(serializers.ModelSerializer):
+class EditionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Replica
+        model = Edition
         fields = '__all__'
 
 
-class ModuleSerializer(serializers.ModelSerializer):
+class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Module
-        fields = '__all__'
-
-
-class SourceReplicaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SourceReplica
-        fields = '__all__'
-
-
-class FSObjectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = FSObject
+        model = Resource
         fields = '__all__'
