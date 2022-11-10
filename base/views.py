@@ -18,8 +18,8 @@ def api_root(request, format=None):
     """
     return Response({
         'packages': reverse('api-package', request=request),
-        'editions': reverse('api-replica', request=request),
-        'resources': reverse('api-module', request=request),
+        'editions': reverse('api-edition', request=request),
+        'resources': reverse('api-resource', request=request),
     })
 
 
