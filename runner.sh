@@ -10,7 +10,7 @@ if [ -z "$FSN" ]
   then export FSN=""
 fi
 if [ ! -z "$MIGRATE" ]
-  then "$MAINDIRECTORY"/manage.py makemigrations && "$MAINDIRECTORY"/manage.py migrate && "$MAINDIRECTORY"/manage.py makemigrations base && "$MAINDIRECTORY"/manage.py migrate base
+  then "$MAINDIRECTORY"/manage.py migrate && "$MAINDIRECTORY"/manage.py migrate base
 fi
 if [ ! -z "$COLLECTSTATIC" ]
   then "$MAINDIRECTORY"/manage.py collectstatic --noinput --clear
