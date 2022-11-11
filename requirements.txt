@@ -1,10 +1,10 @@
 wheel==0.34.2
-asgiref==3.2.7
+asgiref==3.2.10
 defusedxml==0.6.0
 diff-match-patch==20181111
 dj-database-url==0.5.0
-Django==3.0
-django-filter==2.2.0
+Django==3.1
+django-filter==2.4.0
 django-import-export==2.0.2
 django-rest-framework==0.1.0
 djangorestframework==3.13.1
