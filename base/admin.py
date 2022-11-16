@@ -11,6 +11,12 @@ class PackageResource(resources.ModelResource):
         model = Package
 
 
+class PackageTagResource(resources.ModelResource):
+
+    class Meta:
+        model = PackageTag
+
+
 class EditionResource(resources.ModelResource):
 
     class Meta:
@@ -26,6 +32,11 @@ class ResourceResource(resources.ModelResource):
 @admin.register(Package)
 class PackageAdmin(ImportExportModelAdmin):
     resource_class = PackageResource
+
+
+@admin.register(PackageTag)
+class PackageAdmin(ImportExportModelAdmin):
+    resource_class = PackageTagResource
 
 
 @admin.register(Edition)

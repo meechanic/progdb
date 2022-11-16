@@ -8,6 +8,12 @@ class PackageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class PackageTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PackageTag
+        fields = '__all__'
+
+
 class EditionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Edition

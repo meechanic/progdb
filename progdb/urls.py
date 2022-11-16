@@ -47,6 +47,7 @@ schema_view_rf = get_schema_view_rf(
 
 router = routers.DefaultRouter()
 router.register(r'apipackages', ApiPackage)
+router.register(r'apipackagetags', ApiPackageTag)
 router.register(r'apieditions', ApiEdition)
 router.register(r'apiresources', ApiResource)
 

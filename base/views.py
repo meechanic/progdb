@@ -18,6 +18,7 @@ def api_root(request, format=None):
     """
     return Response({
         'packages': reverse('api-package', request=request),
+        'packagetags': reverse('api-packagetag', request=request),
         'editions': reverse('api-edition', request=request),
         'resources': reverse('api-resource', request=request),
     })
@@ -34,6 +35,19 @@ class ApiPackage(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     filter_fields=('name',)
     search_fields=('name',)
+
+
+@authentication_classes((SessionAuthentication, BasicAuthentication, TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
+class ApiPackageTag(viewsets.ModelViewSet):
+    """
+    API endpoint that represents a list of objects.
+    """
+    queryset = PackageTag.objects.all()
+    serializer_class = PackageTagSerializer
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+    filter_fields=('key', 'value')
+    search_fields=('key', 'value')
 
 
 @authentication_classes((SessionAuthentication, BasicAuthentication, TokenAuthentication,))
